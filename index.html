@@ -1,0 +1,708 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raj Manoj Bytari - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style> 
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #6650a4 0%, #5f0a87 100%);
+      color: #f3e8ff;
+      min-height: 100vh;
+      transition: background 0.8s cubic-bezier(.4,0,.2,1);
+    }
+    header {
+      background: linear-gradient(90deg, #7f53ac 0%, #647dee 100%);
+      color: #fff;
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(127, 83, 172, 0.15);
+      opacity: 0;
+      transform: translateY(-30px) scale(0.98) rotateX(10deg);
+      animation: fadeInDown 1s 0.1s cubic-bezier(.22,1,.36,1.01) forwards;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      will-change: opacity, transform;
+      transition: background 0.5s;
+    }
+    @keyframes fadeInDown {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0);
+      }
+    }
+    /* Responsive Navbar */
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: background 0.4s;
+    }
+    nav {
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s 0.5s cubic-bezier(.22,1,.36,1.01) forwards;
+      transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-bottom 0.3s, transform 0.3s cubic-bezier(.4,0,.2,1);
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: navLinkFadeIn 0.7s cubic-bezier(.22,1,.36,1.01) forwards;
+    }
+    nav a:nth-child(1) { animation-delay: 0.7s; }
+    nav a:nth-child(2) { animation-delay: 0.8s; }
+    nav a:nth-child(3) { animation-delay: 0.9s; }
+    nav a:nth-child(4) { animation-delay: 1.0s; }
+    nav a:nth-child(5) { animation-delay: 1.1s; }
+    nav a:nth-child(6) { animation-delay: 1.2s; }
+    nav a:nth-child(7) { animation-delay: 1.3s; }
+    @keyframes navLinkFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    nav a:hover {
+      color: #ffe53b;
+      border-bottom: 2px solid #ffe53b;
+      transform: scale(1.12) rotate(-2deg);
+      filter: drop-shadow(0 2px 6px #ffe53b55);
+      transition: color 0.2s, border-bottom 0.3s, transform 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    /* Hamburger styles */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      margin-left: 1rem;
+      background: none;
+      border: none;
+      z-index: 101;
+      transition: background 0.3s;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 28px;
+      height: 4px;
+      margin: 4px 0;
+      background: #fff;
+      border-radius: 2px;
+      transition: 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    /* Hamburger animation when open */
+    .nav-open .nav-toggle span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-open .nav-toggle span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+    /* Responsive Styles */
+    @media (max-width: 900px) {
+      .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+      }
+      nav {
+        margin-top: 0.5rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .container {
+        padding: 1rem;
+        margin: 1rem;
+      }
+      nav a {
+        margin: 0 0.5rem;
+        font-size: 1rem;
+      }
+      .projects {
+        grid-template-columns: 1fr;
+      }
+      .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 0.5rem;
+      }
+      .nav-toggle {
+        display: flex;
+      }
+      nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, #a4508b 0%, #5f0a87 100%);
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        width: 100%;
+        margin-top: 0;
+        box-shadow: 0 4px 16px rgba(127, 83, 172, 0.12);
+        transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+      }
+      .nav-open nav {
+        max-height: 400px;
+        padding-bottom: 0.5rem;
+      }
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+        font-size: 1.1rem;
+        width: 100%;
+      }
+    }
+    @media (max-width: 500px) {
+      header {
+        padding: 1rem 0 0.5rem 0;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+      .container {
+        padding: 0.5rem;
+        margin: 0.5rem;
+      }
+      .project, .experience li, .education li, .certifications li, .internships li {
+        padding: 0.75rem;
+      }
+    }
+    a {
+      color: #b621fe;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #ffe53b;
+      text-shadow: 0 2px 8px #ffe53b33;
+      transition: color 0.2s, text-shadow 0.3s;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: rgba(44, 7, 89, 0.95);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(127, 83, 172, 0.13);
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation: fadeInUp 1.2s 0.3s cubic-bezier(.22,1,.36,1.01) forwards;
+      will-change: opacity, transform;
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+      }
+      80% {
+        opacity: 1;
+        transform: translateY(-6px) scale(1.01);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    section {
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: sectionFadeIn 0.9s cubic-bezier(.22,1,.36,1.01) forwards;
+      will-change: opacity, transform;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    section:nth-of-type(1) { animation-delay: 0.4s; }
+    section:nth-of-type(2) { animation-delay: 0.6s; }
+    section:nth-of-type(3) { animation-delay: 0.8s; }
+    section:nth-of-type(4) { animation-delay: 1.0s; }
+    section:nth-of-type(5) { animation-delay: 1.2s; }
+    section:nth-of-type(6) { animation-delay: 1.4s; }
+    section:nth-of-type(7) { animation-delay: 1.6s; }
+    @keyframes sectionFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+      }
+      80% {
+        opacity: 1;
+        transform: translateY(-4px) scale(1.01);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    h2 {
+      color: #b621fe;
+      border-bottom: 2px solid #f7971e;
+      padding-bottom: 0.5rem;
+      transition: color 0.3s;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: h2FadeIn 0.7s cubic-bezier(.22,1,.36,1.01) forwards;
+    }
+    section:nth-of-type(1) h2 { animation-delay: 0.45s; }
+    section:nth-of-type(2) h2 { animation-delay: 0.65s; }
+    section:nth-of-type(3) h2 { animation-delay: 0.85s; }
+    section:nth-of-type(4) h2 { animation-delay: 1.05s; }
+    section:nth-of-type(5) h2 { animation-delay: 1.25s; }
+    section:nth-of-type(6) h2 { animation-delay: 1.45s; }
+    section:nth-of-type(7) h2 { animation-delay: 1.65s; }
+    @keyframes h2FadeIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    h2:hover {
+      color: #ffe53b;
+      text-shadow: 0 2px 8px #ffe53b33;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    /* Projects list one by one */
+    .projects {
+      display: block;
+      padding-left: 0;
+    }
+    .project {
+      background: linear-gradient(120deg, #7f53ac 0%, #b621fe 100%);
+      color: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 1px 12px rgba(127, 83, 172, 0.13);
+      opacity: 0;
+      transform: scale(0.96) translateY(30px) rotateZ(-2deg);
+      animation: projectFadeIn 0.7s cubic-bezier(.22,1,.36,1.01) forwards;
+      margin-bottom: 1.5rem;
+      will-change: opacity, transform;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    .project:last-child {
+      margin-bottom: 0;
+    }
+    .project:nth-child(1) { animation-delay: 1.0s; }
+    .project:nth-child(2) { animation-delay: 1.1s; }
+    .project:nth-child(3) { animation-delay: 1.2s; }
+    .project:nth-child(4) { animation-delay: 1.3s; }
+    @keyframes projectFadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.96) translateY(30px) rotateZ(-2deg);
+      }
+      80% {
+        opacity: 1;
+        transform: scale(1.03) translateY(-4px) rotateZ(1deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotateZ(0);
+      }
+    }
+    .project h3 {
+      margin-top: 0;
+      color: #ffe53b;
+      transition: color 0.3s, text-shadow 0.3s;
+      opacity: 0;
+      transform: translateX(-15px);
+      animation: projectH3FadeIn 0.6s cubic-bezier(.22,1,.36,1.01) forwards;
+    }
+    .project:nth-child(1) h3 { animation-delay: 1.05s; }
+    .project:nth-child(2) h3 { animation-delay: 1.15s; }
+    .project:nth-child(3) h3 { animation-delay: 1.25s; }
+    .project:nth-child(4) h3 { animation-delay: 1.35s; }
+    @keyframes projectH3FadeIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .project h3:hover {
+      color: #b621fe;
+      text-shadow: 0 2px 8px #b621fe33;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    .experience, .education, .certifications, .internships {
+      list-style: none;
+      padding-left: 0;
+    }
+    .experience li, .education li, .certifications li, .internships li {
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #5f0a87 0%, #a4508b 100%);
+      color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(127, 83, 172, 0.13);
+      opacity: 0;
+      transform: translateX(-30px) scale(0.97);
+      animation: listFadeIn 0.7s cubic-bezier(.22,1,.36,1.01) forwards;
+      will-change: opacity, transform;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    .experience li:nth-child(1),
+    .education li:nth-child(1),
+    .certifications li:nth-child(1),
+    .internships li:nth-child(1) { animation-delay: 1.1s; }
+    .experience li:nth-child(2),
+    .education li:nth-child(2),
+    .certifications li:nth-child(2),
+    .internships li:nth-child(2) { animation-delay: 1.2s; }
+    .experience li:nth-child(3),
+    .education li:nth-child(3),
+    .certifications li:nth-child(3),
+    .internships li:nth-child(3) { animation-delay: 1.3s; }
+    .experience li:nth-child(4),
+    .education li:nth-child(4),
+    .certifications li:nth-child(4),
+    .internships li:nth-child(4) { animation-delay: 1.4s; }
+    .experience li:nth-child(5),
+    .education li:nth-child(5),
+    .certifications li:nth-child(5),
+    .internships li:nth-child(5) { animation-delay: 1.5s; }
+    .experience li:nth-child(6),
+    .education li:nth-child(6),
+    .certifications li:nth-child(6),
+    .internships li:nth-child(6) { animation-delay: 1.6s; }
+    @keyframes listFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-30px) scale(0.97);
+      }
+      80% {
+        opacity: 1;
+        transform: translateX(6px) scale(1.01);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+    .exp-title, .edu-title, .cert-title, .intern-title {
+      font-weight: bold;
+      color: #ffe53b;
+      transition: color 0.3s, text-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: titleFadeIn 0.5s cubic-bezier(.22,1,.36,1.01) forwards;
+    }
+    .experience li:nth-child(1) .exp-title,
+    .education li:nth-child(1) .edu-title,
+    .certifications li:nth-child(1) .cert-title,
+    .internships li:nth-child(1) .intern-title { animation-delay: 1.15s; }
+    .experience li:nth-child(2) .exp-title,
+    .education li:nth-child(2) .edu-title,
+    .certifications li:nth-child(2) .cert-title,
+    .internships li:nth-child(2) .intern-title { animation-delay: 1.25s; }
+    .experience li:nth-child(3) .exp-title,
+    .education li:nth-child(3) .edu-title,
+    .certifications li:nth-child(3) .cert-title,
+    .internships li:nth-child(3) .intern-title { animation-delay: 1.35s; }
+    .experience li:nth-child(4) .exp-title,
+    .education li:nth-child(4) .edu-title,
+    .certifications li:nth-child(4) .cert-title,
+    .internships li:nth-child(4) .intern-title { animation-delay: 1.45s; }
+    .experience li:nth-child(5) .exp-title,
+    .education li:nth-child(5) .edu-title,
+    .certifications li:nth-child(5) .cert-title,
+    .internships li:nth-child(5) .intern-title { animation-delay: 1.55s; }
+    .experience li:nth-child(6) .exp-title,
+    .education li:nth-child(6) .edu-title,
+    .certifications li:nth-child(6) .cert-title,
+    .internships li:nth-child(6) .intern-title { animation-delay: 1.65s; }
+    @keyframes titleFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .exp-title:hover, .edu-title:hover, .cert-title:hover, .intern-title:hover {
+      color: #b621fe;
+      text-shadow: 0 2px 8px #b621fe33;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    .exp-date, .edu-date, .cert-date, .intern-date {
+      color: #ffe53b;
+      font-size: 0.95em;
+      transition: color 0.3s, text-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: dateFadeIn 0.5s cubic-bezier(.22,1,.36,1.01) forwards;
+    }
+    .experience li:nth-child(1) .exp-date,
+    .education li:nth-child(1) .edu-date,
+    .certifications li:nth-child(1) .cert-date,
+    .internships li:nth-child(1) .intern-date { animation-delay: 1.18s; }
+    .experience li:nth-child(2) .exp-date,
+    .education li:nth-child(2) .edu-date,
+    .certifications li:nth-child(2) .cert-date,
+    .internships li:nth-child(2) .intern-date { animation-delay: 1.28s; }
+    .experience li:nth-child(3) .exp-date,
+    .education li:nth-child(3) .edu-date,
+    .certifications li:nth-child(3) .cert-date,
+    .internships li:nth-child(3) .intern-date { animation-delay: 1.38s; }
+    .experience li:nth-child(4) .exp-date,
+    .education li:nth-child(4) .edu-date,
+    .certifications li:nth-child(4) .cert-date,
+    .internships li:nth-child(4) .intern-date { animation-delay: 1.48s; }
+    .experience li:nth-child(5) .exp-date,
+    .education li:nth-child(5) .edu-date,
+    .certifications li:nth-child(5) .cert-date,
+    .internships li:nth-child(5) .intern-date { animation-delay: 1.58s; }
+    .experience li:nth-child(6) .exp-date,
+    .education li:nth-child(6) .edu-date,
+    .certifications li:nth-child(6) .cert-date,
+    .internships li:nth-child(6) .intern-date { animation-delay: 1.68s; }
+    @keyframes dateFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .exp-date:hover, .edu-date:hover, .cert-date:hover, .intern-date:hover {
+      color: #b621fe;
+      text-shadow: 0 2px 8px #b621fe33;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: linear-gradient(90deg, #7f53ac 0%, #b621fe 100%);
+      color: #fff;
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInFooter 1s 1.7s cubic-bezier(.22,1,.36,1.01) forwards;
+      will-change: opacity, transform;
+      transition: background 0.5s;
+    }
+    @keyframes fadeInFooter {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      80% {
+        opacity: 1;
+        transform: translateY(-4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <div>
+        <h1 style="margin:0;">Raj Manoj Bytari</h1>
+        <p style="margin:0;">Student | Programmer | ML</p>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#internships">Internships</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <div class="container">
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I’m a Computer Science and Engineering (AI & ML) undergraduate with a passion for building intelligent systems and solving real-world problems using machine learning and full-stack development. I specialize in predictive modeling, and web-based AI solutions.
+      </p>
+    </section>
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <ul>
+        <li>
+          <strong>Languages:</strong> Python, Java, C, C++, JavaScript, SQL
+        </li>
+        <li>
+          <strong>Tools:</strong> VS Code, GitHub, Eclipse, MySQL
+        </li>
+        <li>
+          <strong>Frameworks/Tech:</strong> Flask, MongoDB, React.js, Node.js, TensorFlow, Keras
+        </li>
+      </ul>
+    </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul class="projects" style="list-style: none; padding-left: 0;">
+        <li class="project">
+          <h3>Cloud VM Resource Prediction and Auto-Scaling Optimization Using LSTM</h3>
+          <span class="exp-date">Mar 2025</span>
+          <ul>
+            <li>Built a deep learning model to predict CPU, memory, disk, and network utilization.</li>
+            <li>Enabled auto-scaling decisions in cloud environments.</li>
+            <li>Used time-series forecasting and data engineering techniques.</li>
+          </ul>
+        </li>
+        <li class="project">
+          <h3>AI-Powered Recruitment Automation Web App</h3>
+          <span class="exp-date">Feb 2025</span>
+          <ul>
+            <li>Developed a Flask-based app for automated JD summarization and resume shortlisting.</li>
+            <li>Integrated PDF parsing and NLP skill extraction for candidate matching.</li>
+          </ul>
+        </li>
+        <li class="project">
+          <h3>Skin Disease Detection</h3>
+          <span class="exp-date">Nov 2024</span>
+          <ul>
+            <li>Created a web application using VGG19 CNN model to detect skin diseases.</li>
+            <li>Used Flask for deployment and Matplotlib for result visualization.</li>
+          </ul>
+        </li>
+        <li class="project">
+          <h3>Hospital Management System</h3>
+          <span class="exp-date">Nov 2024</span>
+          <ul>
+            <li>Web app for managing patients, appointments, and billing.</li>
+            <li>Implemented using Flask, HTML, CSS, and DBMS concepts.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section id="internships">
+      <h2>Internships</h2>
+      <ul class="internships">
+        <li>
+          <span class="intern-title">AWS Data Engineering Virtual Internship</span>
+        </li>
+        <li>
+          <span class="intern-title">Google AI-ML Virtual Internship</span>
+        </li>
+        <li>
+          <span class="intern-title">Google Android Developer Virtual Internship</span>
+        </li>
+      </ul>
+    </section>
+    <section id="education">
+      <h2>Education</h2>
+      <ul class="education">
+        <li>
+          <span class="edu-title">B.Tech in CSE (AI & ML) - Velagapudi Ramakrishna Siddhartha Engineering College</span><br>
+          <span class="edu-date">2022 – Present</span>
+          <p>CGPA: 8.28 | Vijayawada, India</p>
+        </li>
+        <li>
+          <span class="edu-title">Intermediate (Class 11 & 12) - NRI Junior College</span><br>
+          <span class="edu-date">2020 – 2022</span>
+          <p>Percentage: 96.6% | Eluru, India</p>
+        </li>
+      </ul>
+    </section>
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <ul class="certifications">
+        <li>
+          <span class="cert-title">Data Science with Python – EDX</span><br>
+          <span class="cert-date">Issued: Jul 2024</span>
+        </li>
+        <li>
+          <span class="cert-title">CCNA: Intro to Networks – Cisco</span><br>
+          <span class="cert-date">Issued: May 2024</span>
+        </li>
+        <li>
+          <span class="cert-title">AWS Academy Data Engineering – Amazon</span><br>
+          <span class="cert-date">Issued: May 2024</span>
+        </li>
+        <li>
+          <span class="cert-title">Intro to MongoDB – MongoDB University</span><br>
+          <span class="cert-date">Issued: May 2024</span>
+        </li>
+        <li>
+          <span class="cert-title">Modern C++ – NPTEL</span><br>
+          <span class="cert-date">Issued: Nov 2023</span>
+        </li>
+        <li>
+          <span class="cert-title">Python Programming Essentials – Cisco</span><br>
+          <span class="cert-date">Issued: Jun 2023</span>
+        </li>
+      </ul>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        Email: <a href="mailto:rajmanojb817@gmail.com">rajmanojb817@gmail.com</a><br>
+        LinkedIn: <a href="https://www.linkedin.com/in/raj-manoj-bytari-948944258" target="_blank">Your LinkedIn</a>
+      </p>
+    </section>
+  </div>
+  <footer>
+    &copy; 2024 Raj Manoj Bytari. All rights reserved.
+  </footer>
+  <script>
+    // Responsive navbar toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const header = document.querySelector('header');
+    navToggle.addEventListener('click', function() {
+      header.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', header.classList.contains('nav-open'));
+    });
+    // Close nav on link click (mobile)
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        if(window.innerWidth <= 600) {
+          header.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
